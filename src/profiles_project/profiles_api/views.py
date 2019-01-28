@@ -1,10 +1,29 @@
 from django.shortcuts import render
 
 from rest_framework.views import APIView
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 
 from . import serializers
+
+
+class Hello(viewsets.ViewSet):
+    """Test API Viewset"""
+
+    def list(self, request):
+        """return a hello message"""
+
+        viewset_list = [
+            'Uses actions (list, create, retrieve, update, partial_update)',
+            'Automatically maps URLs using Routers',
+            'provides more functioanlity with less code'
+        ]
+
+        return Response({
+            'message': "Hello",
+            'viewset_list': viewset_list
+        })
 
 
 class ApiNameHere(APIView):
