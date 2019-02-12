@@ -11,6 +11,8 @@ from . import serializers
 class Hello(viewsets.ViewSet):
     """Test API Viewset"""
 
+    serializer_class = serializers.ApiNameSerializer
+
     def list(self, request):
         """return a hello message"""
 
@@ -23,6 +25,50 @@ class Hello(viewsets.ViewSet):
         return Response({
             'message': "Hello",
             'viewset_list': viewset_list
+        })
+
+    def create(self, request):
+        """Create a new Hello message"""
+
+        serializer = serializers.ApiNameSerializer(data=request.data)
+
+        if serializer.is_valid():
+            # Has to be the same name as what we defined in the serializer
+            name = serializer.data.get("random_quote")
+            print(name)
+            message = "Hello {}".format(name)
+            return Response({
+                "message": message
+            })
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, pk=None):
+        """Handles getting an object by its ID"""
+
+        return Response({
+            "http_method": "GET"
+        })
+
+    def update(self, request, pk=None):
+        """Handles updating an object"""
+
+        return Response({
+            "http_method": "PUT"
+        })
+
+    def partial_update(self, request, pk=None):
+        """Handles updating part of an object"""
+
+        return Response({
+            "http_method": "PATCH"
+        })
+
+    def destroy(self, request, pk=None):
+        """Handles removing an object"""
+
+        return Response({
+            "http_method": "DELETE"
         })
 
 
