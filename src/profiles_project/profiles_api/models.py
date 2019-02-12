@@ -45,6 +45,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     Represent a user's profile inside our system
     """
 
+    # These are the fields of our UserProfile
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     # is_active & is_staff are required when we override Django User model

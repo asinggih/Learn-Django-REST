@@ -6,6 +6,18 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from . import serializers
+from . import models
+
+# ModelViewSet is a special viewset offered by django
+# rest framework that takes care of CRUD operations of
+# our model items
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """Handles CRUD operations of profiles"""
+    serializer_class = serializers.UserProfileSerializer
+
+    queryset = models.UserProfile.objects.all()
 
 
 class Hello(viewsets.ViewSet):

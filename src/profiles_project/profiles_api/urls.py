@@ -10,8 +10,9 @@ router = DefaultRouter()
 # args are
 # - endpoint name
 # - api name inside views.py
-# - base name when calling
+# - base name when calling (no need when registering a Model Viewset)
 router.register('hello-punk', views.Hello, base_name='hello-viewset')
+router.register('profile', views.UserProfileViewSet)
 
 urlpatterns = [
     url('endpoint-name-here', views.ApiNameHere.as_view()),
