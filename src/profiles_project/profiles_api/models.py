@@ -73,3 +73,19 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         """To convert the object to a string"""
 
         return self.email       # since this is unique
+
+
+class ProfileFeedItem(models.Model):
+    """Profile status update"""
+
+    # On delete cascade means that if we delete the User Profile,
+    # automatically delete the profile feeds corresponding to that user
+    user_profile = models.ForeignKey("UserProfile", on_delete=models.CASCADE)
+    status_text = models.CharField(max_length=50)
+    # automatically create time to now, if date isn't specified
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """Return the model as a string"""
+
+        return self.status_text
