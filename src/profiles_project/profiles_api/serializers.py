@@ -18,11 +18,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
     # manually defining the fields one by one
     class Meta:
         model = models.UserProfile
+        # fields we want to include in the serializer
         fields = ('id', 'email', 'name', 'password')
         # specifying which field we want to add special args into
-        extra_kwargs = {'password': {
-            'write_only': True
-        }}
+        extra_kwargs = {
+            'password': {
+                'write_only': True
+            }
+        }
 
     def create(self, validated_data):
         """Create and return a new user"""
@@ -36,3 +39,17 @@ class UserProfileSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+class ProfileFeedItemSerializer(serializers.ModelSerializer):
+    """Serializer for profile feed items"""
+
+    class Meta:
+        model = models.ProfileFeedItem
+        fields = ('id', 'user_profile', 'status_text', 'created_on')
+        extra_kwargs = {
+            # user profile is read only because it's an FK
+            "user_profile": {
+                "read_only": True
+            }
+        }
