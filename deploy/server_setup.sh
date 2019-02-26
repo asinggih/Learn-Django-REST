@@ -11,6 +11,9 @@ VIRTUALENV_BASE_PATH='/usr/local/virtualenvs'
 # Set Ubuntu Language
 locale-gen en_GB.UTF-8
 
+# export LC_ALL
+echo LC_ALL=C >> $HOME/.profile
+
 # Install Python, SQLite and pip
 echo "Installing dependencies..."
 apt-get update
