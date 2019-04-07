@@ -17,7 +17,7 @@ echo LC_ALL=C >> $HOME/.profile
 # Install Python, SQLite and pip
 echo "Installing dependencies..."
 apt-get update
-apt-get install -y python3-dev python3-venv sqlite python3-pip supervisor nginx git
+apt-get install -y python3-dev python3-venv sqlite python-pip supervisor nginx git
 
 mkdir -p $PROJECT_BASE_PATH
 git clone $PROJECT_GIT_URL $PROJECT_BASE_PATH/profiles-rest-api
